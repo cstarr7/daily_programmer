@@ -101,7 +101,8 @@ def menu(calendar):
 		calendar.display_events()
 		to_delete = raw_input('Select an event to edit: ')
 		delete_index = int(to_delete) - 1 #convert input to index value
-		calendar.delete_event(delete_index)
+		if (0 <= delete_index <= len(calendar.calendar)):
+			calendar.delete_event(delete_index)
 		return calendar
 	elif selection == '4':
 		calendar.display_events()
@@ -112,6 +113,14 @@ def menu(calendar):
 		print 'Invalid input, please try again.'
 		return calendar
 
+def format_time(time):
+	#helper to make sure time is added correctly
+	while True:
+		try:
+			return datetime.time(hour=int(time))
+		except:
+			time = raw_input('Invalid time format used, please re-enter time (24h): ')
+
 def format_date(date):
 	#helper to extract date and time from strings and return datetime object
 	while True:
@@ -120,12 +129,11 @@ def format_date(date):
 			return datetime.date(int(date_parse[0]), int(date_parse[1]), 
 				int(date_parse[2]))
 		except:
-			date = raw_input('Invalid date format used, please re-enter date (YYYY/MM/DD)')
+			date = raw_input('Invalid date format used, please re-enter date (YYYY/MM/DD): ')
 
 def main():
 	#calls menu to start program. That's it.
 	calendar = Event_Calendar()
 	while calendar:
 		calendar = menu(calendar)
-
 main()
