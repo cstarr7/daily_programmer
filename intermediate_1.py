@@ -32,7 +32,7 @@ class Event_Calendar(object):
 		time = raw_input('Please enter event time (Hour only (24)): ')
 		description = raw_input('Briefly describe the event: ')
 		date = format_date(date)
-		time = datetime.time(hour=int(time))
+		time = format_time(time)
 		new_event = Event(name, date, time, description)
 		print 'New event details: '
 		print str(new_event)
@@ -60,7 +60,7 @@ class Event_Calendar(object):
 		if '3' in edit_list:
 			print 'The current event time is ' + selected_event.time.isoformat()
 			new_time = raw_input('Please enter new event time (hour only (24)): ')
-			selected_event.time = datetime.time(hour=int(new_time))
+			selected_event.time = format_time(new_time)
 		if '4' in edit_list:
 			print 'The current event description is "' + selected_event.description +'"'
 			new_description = raw_input('Please enter new event description: ')
